@@ -19,10 +19,6 @@ function getPoints (speed) {
 }
 
 
-
-
-
-
 function getInput () {
     let speed = 0;
     do {
@@ -30,7 +26,7 @@ function getInput () {
         let input = prompt("Enter the speed in km/hr: ").trim();
         speed = parseInt(input);
 
-        //Alerts the user when input is invalid
+        //Alerts the user when input is invalid and restarts the loop
         if (isNaN(speed) || speed < 0) {
             alert('Invalid. Please enter the speed in numbers.');
         }

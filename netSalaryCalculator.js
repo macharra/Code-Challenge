@@ -52,35 +52,35 @@ function getNHIF () {
 
     if (grossSalary < 6000) {
         nhif = 150;
-    } else if (grossSalary >= 6000 && grossSalary < 8000) {
+    } else if (grossSalary < 8000) {
         nhif = 300;
-    } else if (grossSalary >= 8000 && grossSalary < 12000) {
+    } else if (grossSalary < 12000) {
         nhif = 400;
-    } else if (grossSalary >= 12000 && grossSalary < 15000) {
+    } else if (grossSalary < 15000) {
         nhif = 500;
-    } else if (grossSalary >= 15000 && grossSalary < 20000) {
+    } else if (grossSalary < 20000) {
         nhif = 600;
-    } else if (grossSalary >= 20000 && grossSalary < 25000) {
+    } else if (grossSalary < 25000) {
         nhif = 750;
-    } else if (grossSalary >= 25000 && grossSalary < 30000) {
+    } else if (grossSalary < 30000) {
         nhif = 850;
-    } else if (grossSalary >= 30000 && grossSalary < 35000) {
+    } else if (grossSalary < 35000) {
         nhif = 900;
-    } else if (grossSalary >= 35000 && grossSalary < 40000) {
+    } else if (grossSalary < 40000) {
         nhif = 950;
-    } else if (grossSalary >= 40000 && grossSalary < 45000) {
+    } else if (grossSalary < 45000) {
         nhif = 1000;
-    } else if (grossSalary >= 45000 && grossSalary < 50000) {
+    } else if (grossSalary < 50000) {
         nhif = 1100;
-    } else if (grossSalary >= 50000 && grossSalary < 60000) {
+    } else if (grossSalary < 60000) {
         nhif = 1200;
-    } else if (grossSalary >= 60000 && grossSalary < 70000) {
+    } else if (grossSalary < 70000) {
         nhif = 1300;
-    } else if (grossSalary >= 70000 && grossSalary < 80000) {
+    } else if (grossSalary < 80000) {
         nhif = 1400;
-    } else if (grossSalary >= 80000 && grossSalary < 90000) {
+    } else if (grossSalary < 90000) {
         nhif = 1500;
-    } else if (grossSalary >= 90000 && grossSalary < 100000) {
+    } else if (grossSalary < 100000) {
         nhif = 1600;
     } else {
         nhif = 1700;
@@ -95,6 +95,7 @@ function getNSSF () {
 
 }
 
+//Call the declared functions
 getGrossSalary();
 PAYE = getPAYE();
 NHIF = getNHIF();
