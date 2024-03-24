@@ -1,6 +1,6 @@
 //Getting the grade
 function getGrade (marks) {
-    let grade = "";
+    
     if (marks >= 80) {
         return 'A';
     } else if (marks >= 60 && marks < 80) {
@@ -18,9 +18,8 @@ function getGrade (marks) {
 function getInput () {
 
     //gets input without any spaces
-    let unedited = prompt("Enter your marks between 0 and 100: ").trim();
-    let marks = parseInt(unedited);
-
+    marks = parseFloat(prompt("Enter your marks between 0 and 100: ").trim());
+    
     //validates user input
     if (isNaN(marks) || marks < 0 || marks > 100) {
         alert('Please enter a number between 0 and 100.');

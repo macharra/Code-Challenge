@@ -18,6 +18,11 @@ function getPoints (speed) {
     }
 }
 
+
+
+
+
+
 function getInput () {
     let speed = 0;
     do {
