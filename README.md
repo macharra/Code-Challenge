@@ -40,7 +40,6 @@ Contributions to the project are welcome. Please fork the repository, make chang
 
 ## Technologies used
 Javascript
-HTML
 Github
 
 

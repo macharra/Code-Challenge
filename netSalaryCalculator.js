@@ -1,29 +1,51 @@
-/* Write a program whose major task is to calculate an individual’s Net Salary by getting the inputs of basic salary and benefits. Calculate the payee (i.e. Tax), NHIFDeductions, NSSFDeductions, gross salary, and net salary.  */
-let basicSalary;
-let benefits;
-let grossSalary;
-let netSalary;
-let PAYE;
-let NHIF;
-let NSSF;
+//Create an unterface for input and output
+const readline = require('readline');
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
 
-//Get the total gross salary
-function getGrossSalary () {
-    do {
-        benefits = parseFloat(prompt('Enter your month\'s basic salary in Ksh: ').trim());
-        basicSalary = parseFloat(prompt('Enter the month\'s benefits if any: ').trim());
 
-        if (isNaN(benefits) || isNaN(basicSalary) || basicSalary <= 0 || benefits < 0) {
-            alert('Invalid. Enter your month\'s basic salary(COMPULSORY) and benefits if any in Ksh.')
+let netSalary, PAYE, NHIF, NSSF
+
+
+
+// Asynchronous function to calculate gross salary
+async function getGrossSalary () {
+    let inputInvalid = true;
+    let basicSalary, benefits, grossSalary;
+
+      // Loop until valid input is received
+    while (inputInvalid) {
+        
+        //prompt user for basic salary and benefits
+        let inputSalary = await new Promise(resolve => {
+            rl.question('Enter your month\'s basic salary in Ksh: ', resolve);
+        });
+        let inputBenefits = await new Promise(resolve => {
+            rl.question('Enter the month\'s benefits if any: ', resolve);
+        });
+
+        basicSalary = parseFloat(inputSalary.trim());
+        benefits = parseFloat(inputBenefits.trim());
+        
+        //check if input is valid
+        if (isNaN(basicSalary) || isNaN(benefits) || basicSalary <= 0 || benefits < 0) {
+            console.log('Invalid input. Please enter valid numbers for basic salary and benefits.');
+        
+        } else {
+            inputInvalid = false;
+            grossSalary = basicSalary + benefits;
         }
+    }
+    rl.close();
+    return grossSalary;
 
-    } while(isNaN(basicSalary) || isNaN(benefits) || basicSalary <= 0 || benefits < 0)
-
-    return grossSalary = basicSalary + benefits;
 }
 
+
 //Get the value of PAYE
-function getPAYE () {
+function getPAYE (grossSalary) {
     let paye;
     if (grossSalary <= 24000) {
         paye = (grossSalary * 0.1);
@@ -46,7 +68,7 @@ function getPAYE () {
 }
 
 //Get the value of NHIF
-function getNHIF () {
+function getNHIF (grossSalary) {
 
     let nhif;
 
@@ -89,27 +111,30 @@ function getNHIF () {
 }
 
 //Get the value of NSSF
-function getNSSF () {
+function getNSSF (grossSalary) {
     let nssf = (grossSalary * 0.06);
     return Math.floor(nssf);
 
 }
 
-//Call the declared functions
-getGrossSalary();
-PAYE = getPAYE();
-NHIF = getNHIF();
-NSSF = getNSSF();
 
 //Get the net salary
-function getNetSalary() {
+function getNetSalary(grossSalary, PAYE, NHIF, NSSF) {
   
 
     let totalTax = PAYE + NHIF + NSSF;
     netSalary = grossSalary - totalTax;
 
-    alert(`PAYE: Ksh ${PAYE}   NHIF: Ksh ${NHIF}   NSSF: Ksh ${NSSF}\nGross salary: Ksh ${grossSalary}\nTotal tax: Ksh ${totalTax}\nNet salary: Ksh ${netSalary}`);
+    console.log(`PAYE: Ksh ${PAYE}   NHIF: Ksh ${NHIF}   NSSF: Ksh ${NSSF}\nGross salary: Ksh ${grossSalary}\nTotal tax: Ksh ${totalTax}\nNet salary: Ksh ${netSalary}`);
 }
 
-getNetSalary();
+
+// Asynchronous self-invoking function to calculate and display net salary
+(async () => {
+    let grossSalary = await getGrossSalary();
+    let PAYE = getPAYE(grossSalary);
+    let NHIF = getNHIF(grossSalary);
+    let NSSF = getNSSF(grossSalary);
+    getNetSalary(grossSalary, PAYE, NHIF, NSSF);
+})();
 
